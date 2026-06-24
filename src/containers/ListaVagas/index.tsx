@@ -1,15 +1,20 @@
 import { useState } from 'react'
 import FormVagas from '../../components/FormVagas'
 import Vaga from '../../components/Vaga'
-import {
-  EmptyState,
-  JobsGrid,
-  JobsSection,
-  ResultCount,
-  SectionHeader
-} from './styles'
+import { JobsGrid } from './styles'
 
-const vagas = [
+type Vaga = {
+  id: number
+  titulo: string
+  localizacao: string
+  nivel: string
+  modalidade: string
+  salarioMin: number
+  salarioMax: number
+  requisitos: string[]
+}
+
+const vagas: Vaga[] = [
   {
     id: 1,
     titulo: 'Desenvolvedor front-end',
@@ -28,7 +33,7 @@ const vagas = [
     modalidade: 'pj',
     salarioMin: 5000,
     salarioMax: 6500,
-    requisitos: ['Node.js', 'TypeScript', 'APIs', 'SQL']
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 3,
@@ -38,7 +43,7 @@ const vagas = [
     modalidade: 'pj',
     salarioMin: 4000,
     salarioMax: 6000,
-    requisitos: ['React', 'Node.js', 'TypeScript', 'Git']
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 4,
@@ -48,7 +53,7 @@ const vagas = [
     modalidade: 'clt',
     salarioMin: 4000,
     salarioMax: 5000,
-    requisitos: ['Figma', 'UI', 'UX', 'Design System']
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 5,
@@ -58,7 +63,7 @@ const vagas = [
     modalidade: 'clt',
     salarioMin: 7000,
     salarioMax: 8000,
-    requisitos: ['React', 'TypeScript', 'Testes', 'CSS']
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 6,
@@ -68,7 +73,7 @@ const vagas = [
     modalidade: 'pj',
     salarioMin: 12000,
     salarioMax: 15000,
-    requisitos: ['React', 'TypeScript', 'Inglês', 'Testes']
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 7,
@@ -78,55 +83,35 @@ const vagas = [
     modalidade: 'clt',
     salarioMin: 4000,
     salarioMax: 5000,
-    requisitos: ['HTML', 'CSS', 'JavaScript', 'React']
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   }
 ]
 
 const ListaVagas = () => {
   const [filtro, setFiltro] = useState<string>('')
 
-  const vagasFiltradas = vagas.filter((vaga) => {
-    const conteudo = `${vaga.titulo} ${vaga.requisitos.join(' ')}`.toLowerCase()
-    return conteudo.includes(filtro)
-  })
+  const vagasFiltradas = vagas.filter(
+    (x) => x.titulo.toLocaleLowerCase().search(filtro) >= 0
+  )
 
   return (
-    <>
+    <div>
       <FormVagas aoPesquisar={(termo: string) => setFiltro(termo)} />
-      <JobsSection>
-        <SectionHeader>
-          <div>
-            <h2>Vagas em destaque</h2>
-            <p>Oportunidades selecionadas para você dar o próximo passo.</p>
-          </div>
-          <ResultCount>
-            {vagasFiltradas.length}{' '}
-            {vagasFiltradas.length === 1 ? 'vaga' : 'vagas'}
-          </ResultCount>
-        </SectionHeader>
-        {vagasFiltradas.length > 0 ? (
-          <JobsGrid>
-            {vagasFiltradas.map((vaga) => (
-              <Vaga
-                key={vaga.id}
-                titulo={vaga.titulo}
-                localizacao={vaga.localizacao}
-                nivel={vaga.nivel}
-                modalidade={vaga.modalidade}
-                salarioMin={vaga.salarioMin}
-                salarioMax={vaga.salarioMax}
-                requisitos={vaga.requisitos}
-              />
-            ))}
-          </JobsGrid>
-        ) : (
-          <EmptyState>
-            <strong>Nenhuma vaga encontrada</strong>
-            Tente pesquisar por outro cargo ou tecnologia.
-          </EmptyState>
-        )}
-      </JobsSection>
-    </>
+      <JobsGrid>
+        {vagasFiltradas.map((vag) => (
+          <Vaga
+            key={vag.id}
+            titulo={vag.titulo}
+            localizacao={vag.localizacao}
+            nivel={vag.nivel}
+            modalidade={vag.modalidade}
+            salarioMin={vag.salarioMin}
+            salarioMax={vag.salarioMax}
+            requisitos={vag.requisitos}
+          />
+        ))}
+      </JobsGrid>
+    </div>
   )
 }
 

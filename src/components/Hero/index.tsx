@@ -1,20 +1,11 @@
-import {
-  Eyebrow,
-  HeroContent,
-  HeroSection,
-  HeroText,
-  HeroTitle
-} from './styles'
+import { HeroContent, HeroSection, HeroTitle } from './styles'
 
 const Hero = () => (
   <HeroSection>
     <HeroContent>
-      <Eyebrow>Novas oportunidades todos os dias</Eyebrow>
-      <HeroTitle>Seu próximo grande trabalho começa aqui.</HeroTitle>
-      <HeroText>
-        Encontre vagas em tecnologia, design e criatividade que combinam com o
-        seu talento e com o futuro que você quer construir.
-      </HeroText>
+      <HeroTitle>
+        As melhores vagas para tecnologia, design e artes visuais.
+      </HeroTitle>
     </HeroContent>
   </HeroSection>
 )

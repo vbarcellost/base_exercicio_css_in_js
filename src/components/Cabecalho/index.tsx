@@ -1,14 +1,8 @@
-import { Brand, BrandMark, Header, HeaderContent, HeaderTag } from './styles'
+import { Header } from './styles'
 
 const Cabecalho = () => (
   <Header>
-    <HeaderContent>
-      <Brand>
-        <BrandMark>E</BrandMark>
-        <h1>EBAC Jobs</h1>
-      </Brand>
-      <HeaderTag>Talento encontra oportunidade</HeaderTag>
-    </HeaderContent>
+    <h1>EBAC Jobs</h1>
   </Header>
 )
 
